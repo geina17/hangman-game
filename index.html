@@ -2,11 +2,11 @@
 <html lang="en-us">
   <head>
   	   <meta charset="UTF-8">
-   	   <script type=" text/javascript" src="write.javascript"></script>
+   	   
        <link rel="stylesheet" herf="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
        <link rel="stylesheet" herf="style.css">
-       import java.utill.scanner;
-       import java.utill.random;
+     //import java.utill.scanner;
+     //import java.utill.random;
        <title>Artist Hangman</title>
 	</head>
   
@@ -18,72 +18,155 @@
   		public static void main(String[] args){
   			Scanner keyboard = new Scanner(System.in);
   			Random random = new Random();
-  			String[] guesses = {
+  			var words = [
 	  			"word","Vincent van Gogh"; "clue","Dr.Who tried to save him";
 	  			"word","Gustav Klimt", "clue","the father of the Vienna Succession painted with gold";
 	  			"word","Claude Monet";"clue" "father of impressionism";
 	  			"word","Salvidor Dali"; "clue","a surrealist known for his wacky mustache";
 	  			"word","Alphonse Mucha";"clue","creator of art nouveau advertisement";
-	  			"word","Leonardo Da Vinci";"clue","is a member of the ninja turtles."
-  			}
-  			boolean weArePlaying = true;
-  			while (weArePlaying){
-  				System.out.printIn("Ready to play?"); //Vincent van Gogh -> v,i,n,c,e,n,t v,a,n g,o,g,h 
-  				char[] randomWordToGuess = guesses[random.nextInt(guesses.length)].toCharArray();
-  				int amountOfGuesses = randomWordToGuess.length //100
-  				new char[ amountOfGuesses];//_ _ _ _ _ 
+	  			"word","Leonardo Da Vinci";"clue","is a member of the ninja turtles.";
+  			];
 
-  				for (int i = 0; i< playerGuess.length; i++){
-  					playerGuess[i] = '_';
-  				}
-  				
-          boolean wordIsGuessed = false;
-  				int tries = 0;
+        var secretWord, wrongCount, guess;
 
-  				while (!wordIsGuessed && tries != amountOfGuesses){
-	  				system.out.print("current guesses: ");
-	  				printArray(playerGuess);
-	  				System.out.printf("YOu are out of guesses/", amountOfGuesses - tries);
-	  				system.out.printIn("enter a single character");
-	  				char input = scanner.nextLine().charAt(0);
-	  				tries++;
+       
+        var $guess = $('#guess');
+        var $img = $('#hang-img');
+        var $message = $('#message');
 
-	  				if (input =='-'){
-	  					weArePlaying = false;
-	  					wordIsGuessed = true;
-	  				 } else{
-	  						for(int i = 0; i < randomWordToGuess.lenth; i++){
-	  							if (randomWordToGuess[i] == input){
-	  							  	playerGuess[i] = input;
-	  							}
-	  					 }
-	  					if (isTheWordGuessed(playerGuess)){
-	  						wordGuessed = true;
-	  						system.out.printIn("Congratulations!!!");
-	  					}    
-  				}
-  			}
+       
+        $("input").keyup(function(){
+           $("input").css("", "");
+         });
 
-  			if (!wordIsGuessed(playerguessed)System.out.printIn("Ran out of guesses")){
-          System.out.ptinIn("GAme OvEr X.x");
-          System.out.ptinIn("do you want to play again?(yes/no)");
-        if (anotherGame.equals("no")) weArePlaying = false;
-  			}
-  		}
+        $('#reset').on('click', initialize);
 
-  		public static void printArray(char[] array){
-  			for (int i =0; i <array.length; i++){
-  				System.out.print(array[i] + " ");
-  		}
-  		System.out.printIn();
-  	}
-  		public static boolean isTheWordGuessed(char[]array){
-  			for (int i = 0; i < array.length; i++){
-  				if (array[i]=="_")return false;
-  		}
-  		return true;
+        
+        initialize();
 
-  	}
-  </script>
+        function initialize() {
+            wrongCount = 0;
+            secretWord = words[getRandomInt(words.length -1)];
+
+            guess = "";
+            
+            for (var i = 0; i < secretWord.length; i++) {
+              var currentLetter = secretWord[i];
+              if (currentLetter === " ") {
+                  guess += " "
+              } else {
+                  guess += "_";
+              }
+            };
+
+            $('button.letter-button').prop('disabled', false);
+            render();
+        }
+
+        function getRandomInt(max) {
+            return Math.floor (Math.random() * (max + 1));
+        }
+
+        function render() {
+            $guess.html(guess);
+            $('#wrong').html(`WRONG GUESSES: ${wrongCount}`);
+            $img.attr('src', 'images/img' + wrongCount + '.png')
+
+            if (guess === secretWord) {
+                $message.html("Congratulations!! You solved HangMan!");
+                $message.fadeIn();
+            } else if ( wrongCount === 6) {
+                $message.html("Sorry! You've run out of chances.");
+                $message.fadeIn();
+            } else {
+                $message.html("")
+                $message.hide();
+            }
+        }
+
+        function handleLetterClick (evt) {
+            if (wrongCount === 6) return;
+
+            var letter = evt.target.textContent;
+            console.log(secretWord);
+            if (secretWord.includes(letter)) {
+                var pos = secretWord.indexOf(letter);
+                while ( pos >= 0) {
+                    guess = guess.split('');
+                    guess[pos] = letter;
+                    guess = guess.join('');
+                    pos = secretWord.indexOf(letter,pos +1);
+                }
+            } else {
+                if (evt.target.id !== "reset") {
+                    wrongCount++;
+                }
+            }
+            
+            $(evt.target).prop('disabled', true);
+            $('#reset').prop('disabled', false);
+            render();
+        }
+   <script type="text/javascript" src="js/main.js"> </script>
   </body>
 </html>
+
+  	// 		boolean weArePlaying = true;
+  	// 		while (weArePlaying){
+  	// 			System.out.printIn("Ready to play?"); //Vincent van Gogh -> v,i,n,c,e,n,t v,a,n g,o,g,h 
+  	// 			char[] randomWordToGuess = guesses[random.nextInt(guesses.length)].toCharArray();
+  	// 			int amountOfGuesses = randomWordToGuess.length;//100
+  	// 			new char[ amountOfGuesses];//_ _ _ _ _ 
+
+  	// 			for (int i = 0; i< playerGuess.length; i++){
+  	// 				playerGuess[i] = '_';
+  	// 			}
+  				
+   //        boolean wordIsGuessed = false;
+  	// 			int tries = 0;
+
+  	// 			while (!wordIsGuessed && tries != amountOfGuesses){
+	  // 				system.out.print("current guesses: ");
+	  // 				printArray(playerGuess);
+	  // 				System.out.printf("YOu are out of guesses/", amountOfGuesses - tries);
+	  // 				system.out.printIn("enter a single character");
+	  // 				char input = scanner.nextLine().charAt(0);
+	  // 				tries++;
+
+	  // 				if (input =='-'){
+	  // 					weArePlaying = false;
+	  // 					wordIsGuessed = true;
+	  // 				 } else{
+	  // 						for(int i = 0; i < randomWordToGuess.lenth; i++){
+	  // 							if (randomWordToGuess[i] == input){
+	  // 							  	playerGuess[i] = input;
+	  // 							}
+	  // 					 }
+	  // 					if (isTheWordGuessed(playerGuess)){
+	  // 						wordGuessed = true;
+	  // 						system.out.printIn("Congratulations!!!");
+	  // 					}    
+  	// 			}
+  	// 		}
+
+  	// 		if (!wordIsGuessed(playerguessed)System.out.printIn("Ran out of guesses")){
+   //        System.out.ptinIn("GAme OvEr X.x");
+   //        System.out.ptinIn("do you want to play again?(yes/no)");
+   //      if (anotherGame.equals("no")) weArePlaying = false;
+  	// 		}
+  	// 	}
+
+  	// 	public static void printArray(char[] array){
+  	// 		for (int i =0; i <array.length; i++){
+  	// 			System.out.print(array[i] + " ");
+  	// 	}
+  	// 	System.out.printIn();
+  	// }
+  	// 	public static boolean isTheWordGuessed(char[]array){
+  	// 		for (int i = 0; i < array.length; i++){
+  	// 			if (array[i]=="_")return false;
+  	// 	}
+  	// 	return true;
+
+  	// }
+ 
