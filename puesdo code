@@ -1,0 +1,57 @@
+pseudo code
+
+need to have a header
+ <header> Artsists Hangman </header> 
+need to id word bank
+	var artists = [
+	word","Vincent van Gogh","clue","Dr.Who tried to save him";
+	"word","Gustav Klimt", "clue","the father of the Vienna Succession painted with gold";
+	"word","Claude Monet";"clue","father of impressionism";
+	"word","Salvidor Dali","clue","a surrealist known for his wacky mustache";
+	"word","Alphonse Mucha";"clue","creator of art nouveau advertisement";
+	"word","Leonardo Da Vinci","clue","is a member of the ninja turtles.";
+	"]
+need to create a random generator
+	{
+	string[] randomStrings = new Strings[numberOfWOrds];
+	random artists = new random ();	
+		for (int i = 0; i < numberOfWords; i++)
+	}	
+create guesses
+	new char[ amountOfGuesses];
+		for (int i = 0; i< playerGuess.length; i++){
+			playerGuess[i] = '_';
+			}
+create for loop
+	for( var i = 0; i < secretArtist.length; i++)
+	 var currentLetter = secretArtist[i]
+	  if (currentLetter === " "){
+	  		guess + = " ";
+	  	}else {
+	  		guess + = " _ ";
+	  	}
+	  }
+id how player 
+			wins
+	system.out.printIn( ());
+	if (word.equals(toString())){
+		system.out.printIn("YoU WiN!!")
+		{then }
+			.push(secretArtist.imag src" ");
+		}
+	}
+			loses
+	system.out.printIn( ());
+	if (word.equals(toString())){
+		system.out.printIn("Game OveR!!")
+	}
+			restarts
+
+need to keep track of wins and loses
+	wins = 0
+	losses = 0
+	if(wins){
+	  wins + = 1
+	  }else {
+	  	losses + = 1
+	  	}
