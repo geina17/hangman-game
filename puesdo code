@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pseudo code
 
 need to have a header
@@ -29,6 +30,9 @@ need to create a random generator
 		for (int i = 0; i < numberOfWords; i++)
 	}	
 create guesses
+	<input type="text" onkeyup="myFunction(){
+		show guessed letters
+	}">
 	new char[ amountOfGuesses];
 		for (int i = 0; i< playerGuess.length; i++){
 			playerGuess[i] = '_';
@@ -65,4 +69,12 @@ need to keep track of wins and loses
 	  wins + = 1
 	  }else {
 	  	losses + = 1
-	  	}
+	 }
+	console.log(wins)
+	console.log(loses)
+=======
+container
+	.grid-container {
+	  display: grid;
+	  justify-content: space-evenly;
+	}
