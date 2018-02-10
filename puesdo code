@@ -62,19 +62,25 @@ id how player
 	}
 			restarts
 
-need to keep track of wins and loses
+need to keep track:
 	wins = 0
 	losses = 0
-	if(wins){
-	  wins + = 1
-	  }else {
-	  	losses + = 1
-	 }
+		if(wins){
+		  wins + = 1
+		  }else {
+		  	losses + = 1
+		 }
 	console.log(wins)
 	console.log(loses)
+letters guessed
+
 =======
+display:
 container
 	.grid-container {
 	  display: grid;
 	  justify-content: space-evenly;
 	}
+//create 
+	divide screen into two columns image one side: guesses on the other? aestheticly better? ezer?
+	bootstrap for css make life uber ezer..
